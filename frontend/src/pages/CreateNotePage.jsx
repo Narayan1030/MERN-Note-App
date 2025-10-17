@@ -14,12 +14,12 @@ const CreateNotePage = () => {
 
   const handleFromSubmit = async (e) => {
     e.preventDefault();
-    if(!title.trim()|| !content.trim()){
+    if (!title.trim() || !content.trim()) {
       toast.error("Fields cannot be empty")
     }
     setLoading(true);
     try {
-      await api.post("/notes", { title, content });
+      await api.post("/notes", { title, content});
       toast.success("Note Created");
       navigate("/");
     } catch (err) {
@@ -64,6 +64,9 @@ const CreateNotePage = () => {
             className="bg-[#282828] rounded-2xl text-sm lg:text-lg px-2 h-20 lg:h-40 w-full"
             placeholder="Write your note here"
           ></textarea>
+
+
+
           <div className="flex justify-end">
             <button
               type="submit"

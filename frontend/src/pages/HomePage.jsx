@@ -21,7 +21,7 @@ const HomePage = () => {
         setNotes(res.data);
         setLoading(false);
       } catch (error) {
-        console.log("error fetching data");
+        console.log("error fetching data", error);
       }
     };
     fetchNotes();
@@ -41,21 +41,39 @@ const HomePage = () => {
     }
   };
 
+  // Function to format createdAt date
+  const formatDateOnly = (dateString) => {
+    if (!dateString) return "";
+    const date = new Date(dateString);
+    return date.toLocaleDateString(); // e.g., "10/17/2025"
+  };
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <span className="text-gray-400">Loading...</span>
+      </div>
+    );
+  }
+
   return (
     <div>
       <Navbar />
       <div className="pt-3 w-full h-50 sm:grid sm:grid-cols-2 lg:grid lg:grid-cols-3 text-green-300 flex flex-col justify-center items-center">
         {notes.map((note) => {
           return (
-            <Link to={`note/${note._id}`}>
-              <div
-                key={note._id}
-                className="border-t-2 rounded-lg w-[300px] md:w-[350px] lg:w-[300px] xl:w-[350px] h-[150px] bg-[#101014] flex-col p-3 mt-3 mx-4"
-              >
+            <Link to={`note/${note._id}`} key={note._id}>
+              <div className="border-t-2 rounded-lg w-[300px] md:w-[350px] lg:w-[300px] xl:w-[350px] h-[150px] bg-[#101014] flex-col p-3 mt-3 mx-4 relative">
                 <h1 className="text-2xl pb-2 font-bold text-white">
                   {note.title}
                 </h1>
                 <p className="my-3">{note.content}</p>
+                
+                {/* Display createdAt date in top-right corner */}
+                <span className="absolute top-2 right-3 text-gray-400 text-xs italic">
+                  Created: {formatDateOnly(note.createdAt)}
+                </span>
+
                 <div className="flex mx-3 justify-end gap-3">
                   <span>
                     <FaEdit className="hover:cursor-pointer" />
