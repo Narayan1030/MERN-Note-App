@@ -9,6 +9,7 @@ import api from "../../lib/axios";
 const HomePage = () => {
   const [notes, setNotes] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [search , setSearch] = useState("");
 
   // console.log(notes);
 
@@ -26,6 +27,13 @@ const HomePage = () => {
     };
     fetchNotes();
   }, []);
+
+
+
+  const filteredNotes = notes.filter((notes) =>
+    notes.title.toLowerCase().includes(search.toLowerCase()) ||
+    notes.content.toLowerCase().includes(search.toLowerCase())
+  );
 
   const handleNoteDelete = async (e, _id) => {
     e.preventDefault();
@@ -59,8 +67,20 @@ const HomePage = () => {
   return (
     <div>
       <Navbar />
+
+      {/* Search Bar */}
+      <div className="flex justify-center mt-6 mb-4">
+        <input
+          type="text"
+          value={search}
+          placeholder="Search Notes..."
+          onChange={(e) => setSearch(e.target.value)}
+          className="w-72 sm:w-96 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 bg-[#101014] text-white placeholder-gray-400"
+        />
+      </div>
+
       <div className="pt-3 w-full h-50 sm:grid sm:grid-cols-2 lg:grid lg:grid-cols-3 text-green-300 flex flex-col justify-center items-center">
-        {notes.map((note) => {
+        {filteredNotes.map((note) => {
           return (
             <Link to={`note/${note._id}`} key={note._id}>
               <div className="border-t-2 rounded-lg w-[300px] md:w-[350px] lg:w-[300px] xl:w-[350px] h-[150px] bg-[#101014] flex-col p-3 mt-3 mx-4 relative">
