@@ -19,7 +19,7 @@ const CreateNotePage = () => {
     }
     setLoading(true);
     try {
-      await api.post("/notes", { title, content});
+      await api.post("/notes", { title, content });
       toast.success("Note Created");
       navigate("/");
     } catch (err) {
@@ -73,7 +73,7 @@ const CreateNotePage = () => {
               className="bg-green-500 text-black px-4 my-3 py-2 rounded-3xl"
               disabled={loading}
             >
-              {loading ? "Creating" : "Create"}
+              {loading ? "Creating..." : "Create"}
             </button>
           </div>
         </form>

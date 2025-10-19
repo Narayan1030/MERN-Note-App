@@ -8,7 +8,7 @@ import api from "../../lib/axios";
 
 const HomePage = () => {
   const [notes, setNotes] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   // console.log(notes);
 
