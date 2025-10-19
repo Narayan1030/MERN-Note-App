@@ -7,7 +7,7 @@ import noteRoutes from './routes/noteRoutes.js';
 // import bodyParser from "body-parser";
 import { connectDB } from "./config/db.js";
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 const app = express();
 
 // Middlewares
