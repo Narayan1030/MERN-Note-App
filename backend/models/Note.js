@@ -3,17 +3,14 @@ import  mongoose  from "mongoose";
 const notesSchema = new mongoose.Schema({
     title:{
         type: String,
-        required: true
+        required: true,
+        trim: true
     },
     content:{
         type: String,
         required: true
-    },
-    createdAt:{
-        type: Date,
-        default:Date.now
     }
-})
+},{timestamps:true})
 
 const notes = mongoose.model('notes', notesSchema)
 export default notes
